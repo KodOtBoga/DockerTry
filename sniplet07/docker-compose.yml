@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres
+    container_name: "pgAdmin"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=Snippet07
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=789321456POEBEN
+    volumes:
+      - /var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: "sniplet07"
+    environment:
+      - DB_PASSWORD=789321456POEBEN
+      - DB_DB=Snippet07
+      - DB_HOST=db
+      - DB_TABLE=snippets
+      - DB_PORT=5432
+    ports:
+      - '4000:4000'
+    depends_on:
+      - database
